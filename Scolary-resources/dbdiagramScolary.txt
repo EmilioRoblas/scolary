@@ -1,0 +1,54 @@
+Project "Gestión Centro Educativo" {
+  database_type: "MySQL"
+}
+
+Table usuarios {
+  id int [pk, increment]
+  nombre varchar(100)
+  email varchar(100) [unique]
+  password varchar(255)
+  rol enum('profesor', 'tutor')
+}
+
+Table aulas {
+  id int [pk, increment]
+  nombre varchar(50)
+}
+
+Table alumnos {
+  id int [pk, increment]
+  nombre varchar(100)
+  id_tutor int [ref: > usuarios.id]
+  id_aula int [ref: > aulas.id]
+}
+
+Table asistencias {
+  id int [pk, increment]
+  id_alumno int [ref: > alumnos.id]
+  fecha date
+  presente boolean
+}
+
+Table comedor {
+  id int [pk, increment]
+  id_alumno int [ref: > alumnos.id]
+  fecha date
+  confirmado boolean
+}
+
+Table autorizaciones {
+  id int [pk, increment]
+  titulo varchar(100)
+  descripcion text
+  tipo enum('excursion', 'falta', 'otro')
+  fecha_creacion date
+  id_profesor int [ref: > usuarios.id]
+  id_alumno int [ref: > alumnos.id]
+}
+
+Table firmas_autorizacion {
+  id int [pk, increment]
+  id_autorizacion int [ref: > autorizaciones.id]
+  firmado_por enum('tutor', 'profesor')
+  fecha_firma datetime
+}

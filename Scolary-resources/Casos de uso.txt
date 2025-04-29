@@ -1,0 +1,85 @@
+1. Registrar asistencia diaria
+Objetivo: Marcar los alumnos presentes o ausentes por aula.
+
+Precondición: El profesor debe estar autenticado.
+
+Entradas: Fecha, Aula, Lista de alumnos, Estado de asistencia.
+
+Resultado: Registros en la tabla asistencias.
+
+Postcondición: La asistencia se guarda correctamente y puede usarse para generar la lista del comedor.
+
+2. Generar lista de comedor automáticamente
+Objetivo: Obtener la lista de alumnos que deben ir al comedor en función de los presentes.
+
+Precondición: Se debe haber registrado asistencia para ese día.
+
+Entradas: Fecha.
+
+Resultado: Lista insertada en la tabla comedor.
+
+Postcondición: El sistema crea la lista con los alumnos presentes.
+
+3. Crear solicitud de autorización
+Objetivo: Solicitar permiso para excursión, falta justificada, etc.
+
+Precondición: El profesor debe estar autenticado.
+
+Entradas: Alumno, tipo de autorización, descripción, fecha.
+
+Resultado: Inserción en la tabla autorizaciones.
+
+Postcondición: El tutor puede verla y firmarla.
+
+4. Ver estado de autorizaciones
+Objetivo: Ver qué tutores han firmado y confirmar la autorización.
+
+Entradas: ID de autorización.
+
+Resultado: Visualización del estado de firmas.
+
+Acciones posibles: Firmar también como profesor.
+
+Tutor Legal
+5. Ver historial de autorizaciones
+Objetivo: Revisar todas las autorizaciones pendientes o históricas.
+
+Precondición: El tutor debe estar autenticado.
+
+Entradas: ID del alumno (implícito por el login).
+
+Resultado: Listado de autorizaciones emitidas.
+
+6. Firmar autorización
+Objetivo: Validar y firmar una autorización emitida por el profesor.
+
+Precondición: El tutor tiene acceso a la autorización.
+
+Entradas: ID de autorización.
+
+Resultado: Registro en firmas_autorizacion.
+
+Postcondición: La autorización queda parcialmente o totalmente firmada (según roles involucrados).
+
+7. Ver asistencia del alumno
+Objetivo: Consultar si su hijo/a ha asistido a clase ciertos días.
+
+Entradas: Fechas, nombre del alumno.
+
+Resultado: Visualización de los registros en asistencias.
+
+Profesor/Tutor
+8. Iniciar sesión
+Objetivo: Acceder al sistema según su rol.
+
+Entradas: Email, contraseña.
+
+Resultado: Acceso autorizado a su panel de usuario.
+
+9. Modificar perfil
+Objetivo: Cambiar nombre, email o contraseña.
+
+Entradas: Nuevos datos.
+
+Resultado: Actualización de su perfil.
+

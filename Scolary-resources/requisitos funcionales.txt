@@ -1,0 +1,121 @@
+Requisitos Funcionales (RF)
+Módulo de Gestión de Usuarios y Roles
+RF1: Registro y gestión de usuarios (administradores, profesores, tutores legales) con roles diferenciados.
+
+RF2: Asignación de alumnos a tutores legales y vinculación con aulas/profesores.
+
+RF3: Configuración de aulas, cursos y asignaturas por parte del administrador.
+
+Módulo de Asistencia y Comedor
+RF4: Registro diario de asistencia por parte de los profesores (presencia/ausencia de alumnos).
+
+RF5: Generación automática de listas del comedor basadas en la asistencia del día (ej.: si un alumno asistió a clase, se incluye en la lista).
+
+Opciones para ajustes manuales (ej.: alumno que se marcha antes).
+
+RF6: Notificación automática al personal del comedor (vía email o en la app) con la lista generada.
+
+Módulo de Comunicación y Autorizaciones
+RF7: Creación de solicitudes/autorizaciones por parte de profesores (excursiones, faltas justificadas, etc.).
+
+Campos: tipo (excursión, falta, etc.), fecha, descripción, alumno(s) afectados.
+
+RF8: Notificación en tiempo real a tutores legales para firmar/autorizar la solicitud (vía email o notificación en la app).
+
+RF9: Firma digital del tutor legal mediante la app (ej.: botón de confirmación + contraseña/2FA).
+
+RF10: Confirmación por parte del profesor una vez firmada la autorización.
+
+RF11: Historial de autorizaciones con estados (pendiente, aprobada, rechazada) y documentos adjuntos (ej.: PDF firmado).
+
+RF12: Sistema de mensajería interna entre profesores y tutores para aclaraciones.
+
+Módulo de Reportes y Seguimiento
+RF13: Reportes de asistencia mensual por alumno/aula (para profesores y administradores).
+
+RF14: Reportes de uso del comedor (para administradores).
+
+RF15: Registro de actividades (logs) de usuarios (ej.: quién modificó una autorización).
+
+Requisitos No Funcionales (RNF)
+Seguridad y Privacidad
+RNF1: Cumplimiento con RGPD (protección de datos de menores).
+
+RNF2: Autenticación segura (contraseñas encriptadas, opción de 2FA).
+
+RNF3: Control de acceso basado en roles (ej.: tutores solo ven información de sus hijos).
+
+RNF4: Cifrado de datos sensibles (ej.: firmas digitales, comunicaciones).
+
+Usabilidad
+RNF5: Interfaz intuitiva y responsive (accesible desde móvil/tablet).
+
+RNF6: Notificaciones automáticas (push/email) para acciones críticas (ej.: autorización pendiente).
+
+Rendimiento y Escalabilidad
+RNF7: Tiempo de respuesta < 2 segundos en acciones comunes (carga de listas, envío de autorizaciones).
+
+RNF8: Soporte para alta concurrencia (ej.: muchos usuarios accediendo a la vez al inicio de clases).
+
+RNF9: Capacidad de integración con sistemas externos (ej.: software de gestión del centro educativo).
+
+Mantenimiento y Soporte
+RNF10: Documentación técnica y para usuarios finales.
+
+RNF11: Sistema de backups diarios y recuperación ante fallos.
+
+Entidades Principales (Modelo de Datos)
+Usuarios:
+
+Administradores, profesores, tutores legales.
+
+Campos: ID, nombre, email, rol, contraseña.
+
+Alumnos:
+
+Campos: ID, nombre, aula, tutor legal asociado.
+
+Aulas:
+
+Campos: ID, nombre, profesor asignado, lista de alumnos.
+
+Asistencia:
+
+Campos: ID, fecha, alumno, estado (presente/ausente).
+
+Autorizaciones:
+
+Campos: ID, tipo, fecha, alumno(s), estado, firma digital, comentarios.
+
+Mensajes:
+
+Campos: ID, remitente, destinatario, contenido, fecha.
+
+Tecnologías Sugeridas
+Backend: PHP (Laravel o Symfony) + MySQL/MariaDB.
+
+Frontend: HTML/CSS/JS con Bootstrap o Tailwind.
+
+Seguridad: JSON Web Tokens (JWT) para autenticación, librerías de cifrado (OpenSSL).
+
+Notificaciones: API de correo (PHPMailer) o servicios como Twilio (SMS).
+
+Casos de Uso Críticos
+Generar lista del comedor:
+
+Al finalizar la jornada, el sistema cruza la asistencia y genera la lista automáticamente.
+
+Firmar una autorización:
+
+Tutor recibe notificación → accede a la app → firma digitalmente → el profesor confirma.
+
+Registrar ausencia justificada:
+
+Profesor crea una solicitud → tutor la aprueba → el sistema actualiza el registro de asistencia.
+
+Posibles Desafíos
+Sincronización en tiempo real de autorizaciones.
+
+Validación legal de firmas digitales (requerimientos legales según país).
+
+Integración con sistemas legacy del centro educativo (ej.: bases de datos existentes).
