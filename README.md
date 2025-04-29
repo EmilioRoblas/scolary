@@ -1,6 +1,6 @@
-### scolary
+# scolary
 
-# Progress
+### Progress
 
 De momento estoy dándole forma a lo que será la interfaz del administrador. El login lo traeré del proyecto del videoclub (que para eso me lo curré). De momento he puesto manualmente algún ejemplo en el panel de alumno y profesores.
 
