@@ -22,7 +22,7 @@ $profesores = $stmtProfesores->fetchAll();
 
 <div class="container mt-4">
     <h1>Bienvenido a Scolary, <?= htmlspecialchars($_SESSION['usuario']) ?> 👋</h1>
-    <p>Este es el panel principal de administración.</p>
+    <p>Panel de administración</p>
     <div class="card mt-4">
         <div class="card-body">
             <h5 class="card-title">Estadísticas rápidas</h5>
