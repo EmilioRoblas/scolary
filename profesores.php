@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario'])) {
 ?>
 
 <?php include 'includes/header.php'; ?>
-<?php include 'includes/navbar.php'; ?>
+<?php include 'includes/navbarAdmin.php'; ?>
 <?php include 'conexion.php'; ?>
 
 <div class="container mt-4">
@@ -24,7 +24,8 @@ if (!isset($_SESSION['usuario'])) {
         SELECT 
             nombre, 
             email
-        FROM usuarios 
+        FROM usuarios
+        WHERE rol='profesor' 
         LIMIT $registrosPorPagina OFFSET $offset");
 
     $profesores = $stmtUsuarios->fetchAll();

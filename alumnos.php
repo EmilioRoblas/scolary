@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario'])) {
 ?>
 
 <?php include 'includes/header.php'; ?>
-<?php include 'includes/navbar.php'; ?>
+<?php include 'includes/navbarAdmin.php'; ?>
 <?php include 'conexion.php'; ?>
 
 <div class="container mt-4">
@@ -43,6 +43,8 @@ if (!isset($_SESSION['usuario'])) {
                 <th>Nombre</th>
                 <th>Curso</th>
                 <th>Tutor</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>
@@ -51,10 +53,54 @@ if (!isset($_SESSION['usuario'])) {
                     <td><?= $alumno['nombreAlumno']?></td>
                     <td><?= $alumno['nombreAula'] ?></td>
                     <td><?= $alumno['nombreTutor']?></td>
+                    <td>
+                    <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#editarAlumno">
+                    Editar
+                    </button>
+                    </td>
+                    <td><button type="button" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#editarAlumno">
+                     <i class="bi bi-trash"></i>Eliminar
+                    </button></td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
+            <!-- Dialog editarAlumno -->
+    <div class="modal fade" id="editarAlumno" tabindex="-1" aria-labelledby="crearAlumnoLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      
+      <div class="modal-header">
+        <h5 class="modal-title" id="crearAlumnoLabel">Crear Usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+
+      <div class="modal-body">
+        <form action="service/guardarAlumno.php" method="POST">
+          <div class="mb-3">
+            <label class="form-label">Nombre del Alumno</label>
+            <input type="text" name="nombre" class="form-control" placeholder="Introduce el nombre">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Id tutor</label>
+            <input type="text" name="idTutor" class="form-control" placeholder="Introduce el curso">
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Id aula</label>
+            <input type="text" name="idAula" class="form-control" placeholder="Introduce el curso">
+          </div>
+          <div class="modal-footer">
+             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+             <button type="submit" class="btn btn-success">Guardar</button>
+          </div>
+        </form>
+      </div>
+
+      
+
+    </div>
+  </div>
+</div>
 
     <!-- Paginación -->
     <nav>

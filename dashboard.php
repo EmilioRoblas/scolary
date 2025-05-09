@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario'])) {
 ?>
 
 <?php include 'includes/header.php'; ?>
-<?php include 'includes/navbar.php'; ?>
+<?php include 'includes/navbarAdmin.php'; ?>
 <?php include 'conexion.php'; 
 //Recuento alumnos
 $stmtAlumnos = $pdo ->query('SELECT * FROM alumnos');
@@ -31,11 +31,15 @@ $profesores = $stmtProfesores->fetchAll();
     </div>
     <!-- Botón para abrir el dialog -->
 <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#crearAlumno">
-  Añadir nuevo alumno
+  Gestionar alumno
+</button>
+
+<button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#crearAlumno">
+  Gestionar usuario
 </button>
 
 <!-- Dialog -->
-<div class="modal fade" id="crearAlumno" tabindex="-1" aria-labelledby="crearAlumnoLabel" aria-hidden="true">
+<div class="modal fade" id="editarAlumno" tabindex="-1" aria-labelledby="crearAlumnoLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       
