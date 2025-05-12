@@ -4,4 +4,4 @@ if (!isset($_SESSION['usuario'])) {
     header("Location: login.php");
     exit();
 }
-header("Location: dashboard.php");
+header("Location: dashboardAdmin.php");

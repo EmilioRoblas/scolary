@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     //el login lo cogeré del proyecto del videoclub.
     if ($usuario === 'admin' && $clave === 'admin123') {
         $_SESSION['usuario'] = $usuario;
-        header("Location: dashboard.php");
+        header("Location: dashboardAdmin.php");
         exit();
     } else {
         $error = "Usuario o clave incorrectos";

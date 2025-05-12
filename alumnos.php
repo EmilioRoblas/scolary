@@ -23,10 +23,10 @@ if (!isset($_SESSION['usuario'])) {
     $stmtAlumnos = $pdo->query("
         SELECT 
             a.nombre AS nombreAlumno,
-            au.nombre AS nombreAula,
+            g.nombre AS nombreGrupo,
             u.nombre AS nombreTutor
         FROM alumnos a
-        JOIN aulas au ON a.id_aula = au.id
+        JOIN grupo g ON a.id_grupo = g.id
         JOIN usuarios u ON a.id_tutor = u.id
         LIMIT $registrosPorPagina OFFSET $offset");
 
@@ -48,21 +48,21 @@ if (!isset($_SESSION['usuario'])) {
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($alumnos as $alumno): ?>
+            <?php foreach ($alumnos as $alumno){ ?>
                 <tr>
                     <td><?= $alumno['nombreAlumno']?></td>
-                    <td><?= $alumno['nombreAula'] ?></td>
+                    <td><?= $alumno['nombreGrupo'] ?></td>
                     <td><?= $alumno['nombreTutor']?></td>
                     <td>
                     <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#editarAlumno">
                     Editar
                     </button>
                     </td>
-                    <td><button type="button" class="btn btn-danger mt-2" data-bs-toggle="modal" data-bs-target="#editarAlumno">
+                    <td><button type="button" class="btn btn-danger mt-2">
                      <i class="bi bi-trash"></i>Eliminar
                     </button></td>
                 </tr>
-            <?php endforeach; ?>
+            <?php } ?>
         </tbody>
     </table>
             <!-- Dialog editarAlumno -->
@@ -94,10 +94,7 @@ if (!isset($_SESSION['usuario'])) {
              <button type="submit" class="btn btn-success">Guardar</button>
           </div>
         </form>
-      </div>
-
-      
-
+            </div>
     </div>
   </div>
 </div>
