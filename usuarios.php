@@ -11,7 +11,7 @@ if (!isset($_SESSION['usuario'])) {
 <?php include 'conexion.php'; ?>
 
 <div class="container mt-4">
-    <h2>Gestión de profesores</h2>
+    <h2>Gestión de usuarios</h2>
 
     <?php
     // Configuración de paginación
@@ -23,9 +23,9 @@ if (!isset($_SESSION['usuario'])) {
     $stmtUsuarios = $pdo->query("
         SELECT 
             nombre, 
-            email
+            email,
+            rol
         FROM usuarios
-        WHERE rol='profesor' 
         LIMIT $registrosPorPagina OFFSET $offset");
 
     $profesores = $stmtUsuarios->fetchAll();
@@ -40,6 +40,7 @@ if (!isset($_SESSION['usuario'])) {
             <tr>
                 <th>Nombre</th>
                 <th>Email</th>
+                <th>Rol</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +48,7 @@ if (!isset($_SESSION['usuario'])) {
                 <tr>
                     <td><?= $profesor['nombre']?></td>
                     <td><?= $profesor['email'] ?></td>
+                    <td><?= $profesor['rol'] ?></td>
                 </tr>
             <?php } ?>
         </tbody>

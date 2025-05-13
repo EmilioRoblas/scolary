@@ -8,10 +8,6 @@ if (!isset($_SESSION['usuario'])) {
 
 if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["tutor"]) && !empty($_POST["idGrupo"])){
    
-    echo $_POST["nombre"];
-    echo $_POST["tutor"];
-    echo $_POST["idGrupo"];
-
     try {
             
         include '../conexion.php'; //Abrimos conexion con bd tras comprobar que los campos no están vacíos
@@ -24,8 +20,6 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["tutor"]
             ':id_grupo' => $_POST["idGrupo"]
         ]);
 
-    
-        
          header("Location: ../dashboardAdmin.php?mensaje=Alumno ".$_POST['nombre']." añadido correctamente"); // Mensaje de error en caso de envíar parámetros vacíos
          exit();
             
