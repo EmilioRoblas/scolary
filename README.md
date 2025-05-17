@@ -20,7 +20,7 @@ git clone https://github.com/tuusuario/tu-proyecto.git
 cd tu-proyecto
 ```
 
-2. **Clonar el repositorio**
+2. **Instalar dependecias**
 
 ```bash
 composer install
