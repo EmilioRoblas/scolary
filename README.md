@@ -1,8 +1,27 @@
-# scolary
+# 📦 Mi Proyecto PHP
 
-### Progress
+Este proyecto utiliza PHP y Composer para la gestión de dependencias. Asegúrate de tener PHP y Composer instalados antes de empezar.
 
-De momento estoy dándole forma a lo que será la interfaz del administrador. El login lo traeré del proyecto del videoclub (que para eso me lo curré). De momento he puesto manualmente algún ejemplo en el panel de alumno y profesores.
+---
 
-> **Comentario:**  
-> La estructura de archivos no está hecha todavía, aunque ya está la carpeta de `service` que realizará las peticiones a la base de datos, y haré una carpeta de `config` donde irán la configuración de la base de datos como el `conexion.php` y más cosas que vaya creando.
+## ✅ Requisitos
+
+- PHP 7.4 o superior  
+- Composer (https://getcomposer.org)
+
+---
+
+## 🚀 Instalación
+
+1. **Clonar el repositorio**
+
+```bash
+git clone https://github.com/tuusuario/tu-proyecto.git
+cd tu-proyecto
+```
+
+2. **Clonar el repositorio**
+
+```bash
+composer install
+```
