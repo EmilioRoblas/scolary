@@ -1,9 +1,9 @@
 <?php
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit();
-}
+// session_start();
+// if (!isset($_SESSION['usuario'])) {
+//     header("Location: login.php");
+//     exit();
+// }
 
 if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"]) && !isset($_POST["rol"])){
     
@@ -64,7 +64,13 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
    
         include 'crearContrasena.php'; 
 
-        $contrasena = generarContrasena($_POST["nombre"]); //Genero la contraseña para el nuevo tutor legal.
+
+        if($_POST["rol"]== "admin"){
+
+            $contrasena = "admin123";
+        }else{
+            $contrasena = generarContrasena($_POST["nombre"]); //Genero la contraseña para el nuevo tutor legal.
+        }
 
         // Importo librerías de pgpmailer 
         // require '../includes/libs/src/PHPMailer.php';

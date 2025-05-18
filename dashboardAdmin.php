@@ -1,10 +1,10 @@
 <?php
-session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit();
-}
-?>
+// session_start();
+// if (!isset($_SESSION['usuario'])) {
+//     header("Location: login.php");
+//     exit();
+// }
+// ?>
 
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/navbarAdmin.php'; ?>
@@ -31,7 +31,7 @@ $grupos = $stmtGrupos ->fetchAll();
 ?>
 
 <div class="container mt-4">
-    <h1>Bienvenido a Scolary, <?= htmlspecialchars($_SESSION['usuario']) ?> 👋</h1>
+    <h1>Bienvenido a Scolary, <?php //htmlspecialchars($_SESSION['usuario']) ?> 👋</h1>
     <p>Panel de administración</p>
     <div class="card mt-4">
         <div class="card-body">
@@ -63,7 +63,7 @@ $grupos = $stmtGrupos ->fetchAll();
               </div>";
     };
   ?>
-  <!-- Dialog -->
+  <!-- Dialog crear alumno -->
   <div class="modal fade" id="crearAlumno" tabindex="-1" aria-labelledby="crearAlumnoLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
