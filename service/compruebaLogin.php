@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 $_SESSION['usuarioId'] = $usuario["id"];
                 $_SESSION['usuarioRol'] = $usuario["rol"];
                 $_SESSION['usuarioEmail'] = $usuario["email"];
+                $_SESSION['usuarioAvatar'] = $usuario["avatar"];
 
                 if($usuario["rol"] == "admin"){
                     header("Location: ../dashboardAdmin.php"); 

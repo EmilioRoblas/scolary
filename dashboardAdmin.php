@@ -1,10 +1,10 @@
 <?php
-// session_start();
-// if (!isset($_SESSION['usuario'])) {
-//     header("Location: login.php");
-//     exit();
-// }
-// ?>
+session_start();
+if (!isset($_SESSION['usuario']) || $_SESSION['usuarioRol'] != 'admin') {
+    header("Location: login.php");
+    exit();
+}
+?>
 
 <?php include 'includes/header.php'; ?>
 <?php include 'includes/navbarAdmin.php'; ?>
@@ -25,13 +25,11 @@ $tutores = $stmtTutores->fetchAll();
 $stmtGrupos = $pdo ->query('SELECT * FROM grupo');
 $grupos = $stmtGrupos ->fetchAll();
 
-
-
-//No cierro la conexión a bd porque se cierra automáticamente
+//No cierro la conexión a bd porque se cierra automáticamente con pdo
 ?>
 
 <div class="container mt-4">
-    <h1>Bienvenido a Scolary, <?php //htmlspecialchars($_SESSION['usuario']) ?> 👋</h1>
+    <h1>Bienvenido a Scolary, <?php echo htmlspecialchars($_SESSION['usuario']) ?> 👋</h1>
     <p>Panel de administración</p>
     <div class="card mt-4">
         <div class="card-body">
@@ -159,7 +157,7 @@ $grupos = $stmtGrupos ->fetchAll();
         </div>
 
         <div class="modal-body">
-          <form action="service/crearUsuario.php" method="POST">
+          <form action="service/crearUsuario.php" method="POST" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="nombre" class="form-label">Nombre del Usuario</label>
               <input type="text" name="nombre" class="form-control" placeholder="Introduce el nombre">
@@ -177,7 +175,10 @@ $grupos = $stmtGrupos ->fetchAll();
                 <option value="admin">Administrador</option>
               </select>
             </div>
-            
+            <div class="mb-3 d-none" id="campoAvatar">
+              <label for="avatar" class="form-label">Avatar</label>
+              <input type="file" name="avatar" class="form-control">
+            </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
               <button type="submit" class="btn btn-success">Guardar</button>
@@ -187,8 +188,6 @@ $grupos = $stmtGrupos ->fetchAll();
       </div>
     </div>
   </div>
-             
-
 </div>
-
+<script src="js/campoAvatar.js"></script>
 <?php include 'includes/footer.php'; ?>
