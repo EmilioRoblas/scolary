@@ -1,0 +1,14 @@
+{
+    "name": "kuros/scolary",
+    "type": "mobiledetect",
+    "authors": [
+        {
+            "name": "Emilio",
+            "email": "roblasemilio@gmail.com"
+        }
+    ],
+    "require": {
+        "mobiledetect/mobiledetectlib": "^4.8",
+        "phpmailer/phpmailer": "^6.10"
+    }
+}

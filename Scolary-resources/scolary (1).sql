@@ -3,32 +3,25 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2025 a las 12:06:29
+-- Tiempo de generación: 18-05-2025 a las 22:59:00
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
-<<<<<<< HEAD
-=======
-CREATE DATABASE IF NOT EXISTS scolary;
-USE scolary;
->>>>>>> c386736835a670f5029df4c12d9fdfd64c3c49e0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
 
-<<<<<<< HEAD
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
-=======
-
->>>>>>> c386736835a670f5029df4c12d9fdfd64c3c49e0
 
 --
 -- Base de datos: `scolary`
 --
+CREATE DATABASE IF NOT EXISTS `scolary` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `scolary`;
 
 -- --------------------------------------------------------
 
@@ -48,7 +41,7 @@ CREATE TABLE `alumnos` (
 --
 
 INSERT INTO `alumnos` (`id`, `nombre`, `id_tutor`, `id_grupo`) VALUES
-(1, 'Alumno 1', 6, 1),
+(1, 'Alumno 1', 9, 3),
 (3, 'Alumno 3', 8, 1),
 (4, 'Alumno 4', 9, 1),
 (5, 'Alumno 5', 10, 1),
@@ -77,12 +70,12 @@ INSERT INTO `alumnos` (`id`, `nombre`, `id_tutor`, `id_grupo`) VALUES
 (28, 'Alumno 28', 8, 5),
 (29, 'Alumno 29', 9, 5),
 (30, 'Alumno 30', 10, 5),
-(31, 'Alumno 26', 11, 1),
 (32, 'Alumno 26', 11, 3),
 (33, 'Alumno 26', 6, 1),
 (34, 'Alumno 26', 6, 1),
 (36, 'Alumno 26', 6, 1),
-(37, 'Alumno 45', 6, 2);
+(37, 'Alumno 45', 6, 2),
+(38, 'Daniel López', 10, 3);
 
 -- --------------------------------------------------------
 
@@ -110,7 +103,8 @@ CREATE TABLE `autorizaciones` (
   `tipo` enum('excursion','falta','otro') DEFAULT NULL,
   `fecha_creacion` date DEFAULT NULL,
   `id_profesor` int(11) DEFAULT NULL,
-  `id_alumno` int(11) DEFAULT NULL
+  `id_alumno` int(11) DEFAULT NULL,
+  `archivada` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -195,7 +189,9 @@ INSERT INTO `usuarios` (`id`, `nombre`, `email`, `password`, `rol`) VALUES
 (12, 'María Navarro', 'marinav@gmail.com', '$2y$10$xOzzsju/iRapbpANXA7soOyroY2Fp0RKFhTRFgtLgmdZruj6QsHO2', 'tutor'),
 (13, 'Jesús Calleja', 'jesusito@colegio.com', '$2y$10$gA5SpY0ts/P17zBlXEgHju9RWyFrEsZIockTMmZuLki0/BOzt9N/a', 'profesor'),
 (14, 'Pablo Jimenez', 'asdas@familia.com', '$2y$10$rW6PW.eLgu48Zd6WtthNXeeZNGrWEyP2IhEIUjgxqMtVUO.l.Sk.u', 'tutor'),
-(15, 'Emilio Roblas', 'emi@colegio.com', '$2y$10$isLDxEKSk0h24yJFVfR3CuE8chWUFN105aqlsDE2Oso0KPat8zscm', 'profesor');
+(15, 'Emilio Roblas', 'emi@colegio.com', '$2y$10$isLDxEKSk0h24yJFVfR3CuE8chWUFN105aqlsDE2Oso0KPat8zscm', 'profesor'),
+(23, 'admin1', 'admin1@gmail.com', '$2y$10$8VtFOI/CaDKb.3Ocp10RnONqR45LqIGh6DMDBPqLBD0lC/YRA9L.m', 'admin'),
+(24, 'Karim Boukaidi', 'kar@gmail.com', '$2y$10$agstqE6OCur2Cphp4hcgZuv3SH/zRBC9X81ALJ7hlxZ93Smv0FbOS', 'profesor');
 
 --
 -- Índices para tablas volcadas
@@ -260,7 +256,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `alumnos`
 --
 ALTER TABLE `alumnos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `asistencias`
@@ -296,7 +292,7 @@ ALTER TABLE `grupo`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- Restricciones para tablas volcadas
@@ -341,10 +337,6 @@ ALTER TABLE `grupo`
   ADD CONSTRAINT `fk_id_profesor` FOREIGN KEY (`id_profesor`) REFERENCES `usuarios` (`id`);
 COMMIT;
 
-<<<<<<< HEAD
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-=======
-
->>>>>>> c386736835a670f5029df4c12d9fdfd64c3c49e0
