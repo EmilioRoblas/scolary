@@ -7,7 +7,6 @@ if (!isset($_SESSION['usuario'])) {
 
 include 'includes/header.php';
 include 'includes/navbarProfesor.php';
-include 'includes/footer.php';
 include 'conexion.php';
 
 $stmtFirmadas = $pdo ->query('SELECT * FROM autorizaciones_alumnos WHERE estado = "firmada"');
@@ -18,9 +17,6 @@ $pendientes = $stmtPendientes->fetchAll();
 
 $stmtRechazadas = $pdo ->query('SELECT * FROM autorizaciones_alumnos WHERE estado = "rechazada"');
 $rechazadas = $stmtRechazadas->fetchAll();
-
-$stmtCaducadas = $pdo ->query('SELECT * FROM autorizaciones_alumnos WHERE estado = "caducada"');
-$caducadas = $stmtCaducadas->fetchAll();
 
 $stmtGrupos = $pdo ->query('SELECT * FROM grupo');
 $grupos = $stmtGrupos->fetchAll();
