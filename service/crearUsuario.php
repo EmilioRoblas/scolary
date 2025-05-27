@@ -38,7 +38,7 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
             ':password' => $contrasenaHash
         ]);
 
-        
+        //Mandar correo
         header("Location: ../dashboardAdmin.php?mensaje=Tutor ".$_POST['nombre']." añadido correctamente.".$contrasena); // Mensaje de éxito al crear al tutor
         exit();
             
@@ -110,6 +110,7 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
                         ':avatar'      => $rutaDestino
                     ]);
                     
+                    //Mandar correo
                     header("Location: ../dashboardAdmin.php?mensaje=".$_POST["rol"]." ".$_POST['nombre']." añadido correctamente.".$contrasena); // Mensaje de éxito al crear al tutor
                     exit();
                 }else{

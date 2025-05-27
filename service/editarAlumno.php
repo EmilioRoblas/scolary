@@ -5,8 +5,6 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-echo "no entro";
-
 if( isset($_POST["nombre"]) && !empty($_POST["nombre"]) && isset($_POST["idAlumnoEditar"]) && !empty($_POST["idAlumnoEditar"]) && isset($_POST["tutor"]) && !empty($_POST["tutor"]) && isset($_POST["idGrupo"]) && !empty($_POST["idGrupo"])){
 
     include '../conexion.php'; //Abrimos conexion con bd tras comprobar que los campos no están vacíos
