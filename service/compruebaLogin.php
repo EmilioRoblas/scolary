@@ -52,5 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     
 
 }else{
-    echo "cagaste";
+    header("Location: ../login.php");
+    exit();
 }
