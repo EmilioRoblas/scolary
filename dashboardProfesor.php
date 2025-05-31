@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['usuario']) || $_SESSION['usuarioRol'] != 'profesor') {
     header("Location: login.php");
     exit();
 }
@@ -48,7 +48,7 @@ $alumnos = $stmtAlumnos->fetchAll();
     </div>
 
     <!-- Botón para abrir modal crear autorización -->
-    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#crearAutorizacion">
+    <button type="button" class="btn botonCrear mt-3" data-bs-toggle="modal" data-bs-target="#crearAutorizacion">
     + Crear autorización
     </button>
 
@@ -111,9 +111,6 @@ $alumnos = $stmtAlumnos->fetchAll();
                 <?php endforeach; ?>
                 </select>
             </div>
-
-            <!-- ID profesor oculto (puede venir de sesión) -->
-            <input type="hidden" name="id_profesor" value="<?= $profesor_id ?>">
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn btn-success">Guardar</button>

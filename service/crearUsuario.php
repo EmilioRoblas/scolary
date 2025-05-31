@@ -5,24 +5,24 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
+echo "pre require";
+        use PHPMailer\PHPMailer\PHPMailer;
+        use PHPMailer\PHPMailer\Exception;
+
+        require '../vendor/autoload.php';
+echo "post require";
 if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"]) && !isset($_POST["rol"])){
-    
+    echo "entro comprobaciones";
    if (filter_var($_POST["correo"], FILTER_VALIDATE_EMAIL)) {
     
    
-   
+        echo "entro correo de usuario tutor";
    
         include 'crearContrasena.php'; 
 
         $contrasena = generarContrasena($_POST["nombre"]); //Genero la contraseña para el nuevo tutor legal.
 
-        // Importo librerías de pgpmailer 
-        // require '../includes/libs/src/PHPMailer.php';
-        // require '../includes/libs/src/SMTP.php';
-        // require '../includes/libs/src/Exception.php';
-
-        // use PHPMailer\PHPMailer\PHPMailer; // Importa la clase PHPMailer
-        // use PHPMailer\PHPMailer\Exception; // Importa la clase Exception para manejo de errores
+        
 
         $contrasenaHash = password_hash($contrasena, PASSWORD_DEFAULT);
 
@@ -39,8 +39,41 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
         ]);
 
         //Mandar correo
-        header("Location: ../dashboardAdmin.php?mensaje=Tutor ".$_POST['nombre']." añadido correctamente.".$contrasena); // Mensaje de éxito al crear al tutor
-        exit();
+
+        
+
+        $mail = new PHPMailer(true);
+
+        try {
+            // Configuración del servidor
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; 
+            $mail->SMTPAuth = true;
+            $mail->Username = 'kuroshakismurf@gmail.com';
+            $mail->Password = 'nwmj dral pdmb jmbm';
+            $mail->SMTPSecure = 'tls';
+            $mail->Port = 587;
+
+            // Remitente y destinatario
+            $mail->setFrom('centroeducativo@edu.gva.es', 'CentroEducativo');
+            $mail->addAddress($_POST['correo'], $_POST["nombre"]);
+
+            // Contenido
+            $mail->isHTML(true);
+            $mail->Subject = 'Creación de cuenta en Scolary';
+            $mail->Body    = "<b>¡Hola ".$_POST['nombre']."</b><br><br><p>Se le ha dado de alta en la aplicación web de Scolary, donde podrá gestionar
+            sus autorizaciones de sus hijos/hijas respecto al centro educativo.</p><br><br><p>Su usuario es ".$_POST['nombre']." y su contraseña es $contrasena</p>";
+            $mail->AltBody = 'Este es el contenido alternativo (texto plano)';
+
+            $mail->send();
+            echo 'Correo enviado correctamente';
+        } catch (Exception $e) {
+            echo "No se pudo enviar el correo. Error: {$mail->ErrorInfo}";
+        }
+
+
+        // header("Location: ../dashboardAdmin.php?mensaje=Tutor ".$_POST['nombre']." añadido correctamente.".$contrasena); // Mensaje de éxito al crear al tutor
+        // exit();
             
         } catch (PDOException $e) {
             echo "Error al insertar usuario: " . $e->getMessage();
@@ -48,8 +81,8 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
 
 
     }else{
-        header("Location: ../dashboardAdmin.php?error=Formato no válido de email"); // Mensaje de error en caso de formato de mail no válido
-        exit();
+        // header("Location: ../dashboardAdmin.php?error=Formato no válido de email"); // Mensaje de error en caso de formato de mail no válido
+        // exit();
 
     }
 
@@ -57,9 +90,9 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
 
 }else if(isset($_POST["rol"])){
     
-    
+    echo "entro recibiendo rol";
     if (filter_var($_POST["correo"], FILTER_VALIDATE_EMAIL)) {
-        echo "entro mail";
+        echo "entro correo con rol";
         include 'crearContrasena.php'; 
 
         if($_POST["rol"]== "admin"){
@@ -82,8 +115,8 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
             // Validar extensión opcionalmente (solo imágenes)
             $extensionesPermitidas = ['jpg', 'jpeg', 'png', 'gif'];
             if (!in_array(strtolower($ext), $extensionesPermitidas)) {
-                header("Location: ../dashboardAdmin.php?error=Extensión no permitida"); 
-                exit();
+                // header("Location: ../dashboardAdmin.php?error=Extensión no permitida"); 
+                // exit();
             }
 
             // Crear nombre único
@@ -109,19 +142,93 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
                         ':rol'        => $_POST["rol"],
                         ':avatar'      => $rutaDestino
                     ]);
-                    
+                    echo "entro en usuario con rol";
                     //Mandar correo
-                    header("Location: ../dashboardAdmin.php?mensaje=".$_POST["rol"]." ".$_POST['nombre']." añadido correctamente.".$contrasena); // Mensaje de éxito al crear al tutor
-                    exit();
+                     $mail = new PHPMailer(true);
+
+                try {
+                    // Configuración del servidor
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; 
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'kuroshakismurf@gmail.com';
+                    $mail->Password = 'nwmj dral pdmb jmbm';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+
+                    // Remitente y destinatario
+                    $mail->setFrom('centroeducativo@edu.gva.es', 'CentroEducativo');
+                    $mail->addAddress($_POST['correo'], $_POST["nombre"]);
+
+                    // Contenido
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Creación de cuenta en Scolary';
+                    $mail->Body    = "<b>¡Hola ".$_POST['nombre']."</b><br><br><p>Se le ha dado de alta en la aplicación web de Scolary, donde podrá gestionar
+                    sus autorizaciones de sus hijos/hijas respecto al centro educativo.</p><br><br><p>Su usuario es ".$_POST['nombre']." y su contraseña es $contrasena</p>";
+                    $mail->AltBody = 'Este es el contenido alternativo (texto plano)';
+
+                    $mail->send();
+                    echo 'Correo enviado correctamente';
+                } catch (Exception $e) {
+                    echo "No se pudo enviar el correo. Error: {$mail->ErrorInfo}";
+                }
+
+                     header("Location: ../dashboardAdmin.php?mensaje=".$_POST["rol"]." ".$_POST['nombre']." añadido correctamente.".$contrasena); // Mensaje de éxito al crear al tutor
+                     exit();
                 }else{
-                    header("Location: ../dashboardAdmin.php?error=Error al guardar imagen"); 
-                    exit();
+                    // header("Location: ../dashboardAdmin.php?error=Error al guardar imagen"); 
+                    // exit();
                     
                 }
             } catch (PDOException $e) {
                 echo "Error al insertar usuario: " . $e->getMessage();
             }
 
+        }else{
+
+            include '../conexion.php';
+
+            $stmt = $pdo->prepare("INSERT INTO usuarios (nombre, email, password, rol) VALUES (:nombre, :email, :password, :rol)");
+
+                    $stmt->execute([
+                        ':nombre'     => $_POST["nombre"],
+                        ':email'      => $_POST["correo"],
+                        ':password' => $contrasenaHash,
+                        ':rol'        => $_POST["rol"]
+                    ]);
+
+                $mail = new PHPMailer(true);
+
+                try {
+                    // Configuración del servidor
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com'; 
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'kuroshakismurf@gmail.com';
+                    $mail->Password = 'nwmj dral pdmb jmbm';
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+
+                    // Remitente y destinatario
+                    $mail->setFrom('centroeducativo@edu.gva.es', 'CentroEducativo');
+                    $mail->addAddress($_POST['correo'], $_POST["nombre"]);
+
+                    // Contenido
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Creación de cuenta en Scolary';
+                    $mail->Body    = "<b>¡Hola ".$_POST['nombre']."</b><br><br><p>Se le ha dado de alta en la aplicación web de Scolary, donde podrá gestionar
+                    sus autorizaciones de sus hijos/hijas respecto al centro educativo.</p><br><br><p>Su usuario es ".$_POST['nombre']." y su contraseña es $contrasena</p>";
+                    $mail->AltBody = 'Este es el contenido alternativo (texto plano)';
+
+                    $mail->send();
+
+                    header("Location: ../dashboardAdmin.php?mensaje=".$_POST["rol"]." ".$_POST['nombre']." añadido correctamente."); 
+                    exit();
+                } catch (Exception $e) {
+                    header("Location: ../dashboardAdmin.php?error=No se ha podido envíar el correo al crear el usuario: $mail->ErrorInfo"); // Mensaje de error en caso de envíar parámetros vacíos
+                    exit();
+                    
+                }
         }
     }
 

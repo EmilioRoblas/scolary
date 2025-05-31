@@ -1,26 +1,27 @@
 <?php
-function generarContrasena($nombreCompleto){
-
-     $nombreCompleto = trim(preg_replace('/\s+/', ' ', strtolower($nombreCompleto)));
-
-    // Separar las palabras
+function generarContrasena($nombreCompleto) {
+    $nombreCompleto = trim(preg_replace('/\s+/', ' ', strtolower($nombreCompleto)));
     $partes = explode(' ', $nombreCompleto);
 
-    // Verificar que al menos hay dos palabras (nombre y apellido)
     if (count($partes) < 2) {
-        return "Error: Se necesita al menos un nombre y un apellido";
+        header("Location: ../dashboardAdmin.php?error=Se necesita un nombre con apellido separado de un espacio"); // Mensaje de error en caso de formato de mail no válido
+        exit();
     }
-    
+
     $nombre = $partes[0];
     $apellido = $partes[1];
 
-    // Extraer primeras 3 letras (rellenar con "x" si tiene menos de 3 letras)
     $nombre3 = substr(str_pad($nombre, 3, 'x'), 0, 3);
     $apellido3 = substr(str_pad($apellido, 3, 'x'), 0, 3);
 
-    // Número aleatorio de 3 cifras
-    $numero = rand(100, 999);
+    $nombre3 = ucfirst($nombre3);
 
-    // Concatenar resultado
-    return $nombre3 . $apellido3 . $numero;
+    $especiales = '!@#$%^&*';
+    $especial = $especiales[random_int(0, strlen($especiales) - 1)];
+
+    $numero = random_int(10, 99);
+    
+    $contrasena = $nombre3 . $apellido3 . $especial . $numero;
+
+    return $contrasena;
 }

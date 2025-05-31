@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['usuario']) || $_SESSION['usuarioRol'] != 'tutor') {
     header("Location: login.php");
     exit();
 }
@@ -55,7 +55,7 @@ $autorizacionesFirmadas = $stmtAutorizacionesFirmadas->fetchAll();
 ?>
 
 <div class="container mt-4">
-    <img src="<?php echo substr($_SESSION['usuarioAvatar'],3); ?>" alt="Avatar del usuario" width="100">
+    
     <h1>Bienvenido a Scolary, <?php echo $_SESSION['usuario'] ?> 👋</h1>
     <h3>Tus autorizaciones pendientes</h3><br>
     <?php if(count($autorizacionesPendientes) == 0) {?>

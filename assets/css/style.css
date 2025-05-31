@@ -1,0 +1,30 @@
+.scolarynav {
+
+    background-color: rgb(32, 68, 76);
+}
+.botonCrear{
+    background-color: rgb(32, 68, 76);
+    color: azure;
+}
+.botoEditar{
+    background-color: rgb(141, 181, 172);
+    color: rgb(32, 68, 76);
+}
+.botonEliminar{
+   background-color:  rgb(186, 104, 28);
+   color: black;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: rgb(141, 181, 172);
+    background-color:  rgb(186, 104, 28);
+    color: white;
+}
+
+:root {
+  --bs-body-font-family: 'Oswald', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--bs-body-font-family);
+}

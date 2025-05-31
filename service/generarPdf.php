@@ -72,7 +72,7 @@ $pdf->MultiCell(0, 0, "Descripción:\n" . $autorizacion['descripcion'], 0, 'L', 
 $pdf->Ln(10);
 
 // Firma
-$firmaPath = __DIR__ . '/../' . $autorizacion['firma']; // ejemplo: 'view/firmas/firma_MariaNavarro.png'
+$firmaPath = __DIR__ . '/../' . $autorizacion['firma']; 
 if (file_exists($firmaPath)) {
     $pdf->Write(0, "Firma del tutor:", '', 0, 'L', true);
     $pdf->Image($firmaPath, $pdf->GetX(), $pdf->GetY(), 40, 0, 'PNG');

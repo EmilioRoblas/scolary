@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) {
+if (!isset($_SESSION['usuario']) || $_SESSION['usuarioRol'] != 'admin') {
     header("Location: login.php");
     exit();
 }
@@ -30,7 +30,7 @@ $tutores = $stmtTutores->fetchAll();
         </form>
       </div>
     
-    <button type="button" class="btn btn-outline-success mt-3" data-bs-toggle="modal" data-bs-target="#crearAlumno">
+    <button type="button" class="btn botonCrear mt-3" data-bs-toggle="modal" data-bs-target="#crearAlumno">
     + Crear alumno
     </button>
 
@@ -137,7 +137,7 @@ $tutores = $stmtTutores->fetchAll();
     }
 
     // Configuración de paginación
-    $registrosPorPagina = 10;
+    $registrosPorPagina = 6;
     $pagina = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;
     $offset = ($pagina - 1) * $registrosPorPagina;
 
@@ -186,7 +186,7 @@ $tutores = $stmtTutores->fetchAll();
                     <td><?= $alumno['nombreGrupo'] ?></td>
                     <td><?= $alumno['nombreTutor']?></td>
                     <td> 
-                        <button type="button" class="btn btn-primary mt-2" data-bs-toggle="modal" data-bs-target="#editarAlumno" 
+                        <button type="button" class="btn botoEditar mt-2" data-bs-toggle="modal" data-bs-target="#editarAlumno" 
                           data-id="<?php echo htmlspecialchars($alumno['idAlumno']) ?>"
                           data-nombre="<?php echo htmlspecialchars($alumno['nombreAlumno']) ?>">
                           <i class="bi bi-pencil-square"></i>
@@ -196,7 +196,7 @@ $tutores = $stmtTutores->fetchAll();
                     <td>
                       <form action="service/eliminarAlumno.php" method="POST">
                         <input type="hidden" name="idAlumno" value="<?php echo $alumno['idAlumno'] ?>">
-                        <button type="submit" class="btn btn-danger mt-2">
+                        <button type="submit" class="btn botonEliminar mt-2">
                           <i class="bi bi-trash"></i>Eliminar
                         </button>
                       </form>   
@@ -260,7 +260,7 @@ $tutores = $stmtTutores->fetchAll();
         <ul class="pagination">
             <?php for ($i = 1; $i <= $totalPaginas; $i++){?>
                 <li class="page-item <?= $i == $pagina ? 'active' : '' ?>"> <!-- Para activar la página en la que te encuentras -->
-                    <a class="page-link" href="?pagina=<?= $i ?>"><?= $i ?></a>
+                    <a class="page-link botonCrear" href="?pagina=<?= $i ?>"><?= $i ?></a>
                 </li>
             <?php }?>
         </ul>

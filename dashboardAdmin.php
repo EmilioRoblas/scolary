@@ -46,11 +46,11 @@ $grupos = $stmtGrupos ->fetchAll();
     };
   ?>
     <!-- Botón para abrir el dialog -->
-  <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#crearAlumno">
+  <button type="button" class="btn botonCrear mt-3" data-bs-toggle="modal" data-bs-target="#crearAlumno">
     + Crear alumno
   </button>
 
-  <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#crearUsuario">
+  <button type="button" class="btn botonCrear mt-3" data-bs-toggle="modal" data-bs-target="#crearUsuario">
     + Crear usuario
   </button>
 
