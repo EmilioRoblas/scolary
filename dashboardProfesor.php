@@ -25,6 +25,7 @@ $stmtAlumnos = $pdo ->query('SELECT * FROM alumnos');
 $alumnos = $stmtAlumnos->fetchAll();
 
 ?>
+<main class="main-content">
 <div class="container mt-4">
     <img src="<?php echo substr($_SESSION['usuarioAvatar'],3); ?>" alt="Avatar del usuario" width="100">
     <h1>Bienvenido a Scolary, <?php echo $_SESSION['usuario'] ?> 👋</h1>
@@ -123,6 +124,7 @@ $alumnos = $stmtAlumnos->fetchAll();
 
 </div>
 <script src="js/dialogCrearAutorizacion.js"></script>
+</main>
 <?php include 'includes/footer.php'; ?>
 
  

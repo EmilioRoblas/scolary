@@ -6,6 +6,7 @@ if (isset($_SESSION)) {
     // Destruye la sesión
     session_destroy();
 } ?>
+<main class="main-content">
 <div class="container mt-5">
     <div class="mx-auto text-center" style="max-width: 400px;">
     
@@ -29,4 +30,5 @@ if (isset($_SESSION)) {
     </form>
     </div>
 </div>
+</main>
 <?php include 'includes/footer.php'; ?>

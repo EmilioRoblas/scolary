@@ -27,7 +27,7 @@ $grupos = $stmtGrupos ->fetchAll();
 
 //No cierro la conexión a bd porque se cierra automáticamente con pdo
 ?>
-
+<main class="main-content">
 <div class="container mt-4">
     <h1>Bienvenido a Scolary, <?php echo htmlspecialchars($_SESSION['usuario']) ?> 👋</h1>
     <p>Panel de administración</p>
@@ -53,6 +53,21 @@ $grupos = $stmtGrupos ->fetchAll();
   <button type="button" class="btn botonCrear mt-3" data-bs-toggle="modal" data-bs-target="#crearUsuario">
     + Crear usuario
   </button>
+
+    <div class="mt-4">
+  <h5 class="mb-3">📄 Insertar alumnos con archivo CSV</h5>
+  <form action="introducirAlumnos.php" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2" style="max-width: 400px;">
+    <div>
+      <label for="csv" class="form-label">Selecciona archivo CSV</label>
+      <input class="form-control form-control-sm" type="file" id="csv" name="csv" accept=".csv" required>
+    </div>
+    <button type="submit" class="btn botonCrear btn-sm">Subir e insertar</button>
+    <div class="form-text">
+      Formato: <code>nombre, id_tutor, id_grupo</code><br>
+      Ejemplo: <code>Juan Pérez, 1, 2</code>
+    </div>
+  </form>
+</div>
 
   <?php 
     if(isset($_GET['error'])){ 
@@ -190,4 +205,5 @@ $grupos = $stmtGrupos ->fetchAll();
   </div>
 </div>
 <script src="js/campoAvatar.js"></script>
+</main>
 <?php include 'includes/footer.php'; ?>

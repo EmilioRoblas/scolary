@@ -53,7 +53,7 @@ WHERE al.id_tutor = ".$_SESSION['usuarioId']." AND aa.estado = 'firmada';");
 $autorizacionesFirmadas = $stmtAutorizacionesFirmadas->fetchAll();
 
 ?>
-
+<main class="main-content">
 <div class="container mt-4">
     
     <h1>Bienvenido a Scolary, <?php echo $_SESSION['usuario'] ?> 👋</h1>
@@ -65,7 +65,7 @@ $autorizacionesFirmadas = $stmtAutorizacionesFirmadas->fetchAll();
         $_SESSION['id_autorizacion_alumno'] = $autorizacion['autorizacion_alumno'];
         $_SESSION['id_autorizacion'] = $autorizacion['id_autorizacion'];
     
-    ?>
+    ?><main class="main-content"></main>
     <div class="card shadow-sm mb-4">
         <div class="card-body">
             
@@ -113,5 +113,5 @@ $autorizacionesFirmadas = $stmtAutorizacionesFirmadas->fetchAll();
     </div>
     <?php }?>
 </div>
-
+</main>
 <?php include 'includes/footer.php'; ?>

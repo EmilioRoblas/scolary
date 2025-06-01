@@ -13,7 +13,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuarioRol'] != 'admin') {
 $stmtTutores = $pdo ->query('SELECT * FROM usuarios WHERE rol = "tutor"');
 $tutores = $stmtTutores->fetchAll();
 ?>
-
+<main class="main-content">
 
 <div class="container mt-4">
     <h2>Gestión de alumnos</h2>
@@ -267,4 +267,5 @@ $tutores = $stmtTutores->fetchAll();
     </nav>
 </div>
 <script src="js/dialogEditarAlumno.js"></script>
+</main>
 <?php include 'includes/footer.php'; ?>

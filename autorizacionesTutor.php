@@ -54,7 +54,7 @@ $profesores = $stmtProfesores->fetchAll();
 
 
 ?>
-
+<main class="main-content">
 <div class="container mt-4">
     <h1>Tus autorizaciones, <?php echo $_SESSION['usuario'] ?> 📃</h1>
 
@@ -66,7 +66,7 @@ $profesores = $stmtProfesores->fetchAll();
     <?php }?>
    
     <!-- Botón para abrir modal crear autorización -->
-    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#crearAutorizacion">
+    <button type="button" class="btn botonCrear mt-3" data-bs-toggle="modal" data-bs-target="#crearAutorizacion">
     + Crear autorización
     </button>
 
@@ -158,4 +158,5 @@ $profesores = $stmtProfesores->fetchAll();
         </div>
     </div>
     </div>
+</main>
 <?php include 'includes/footer.php';?>

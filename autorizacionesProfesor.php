@@ -42,7 +42,7 @@ $stmt->execute();
 $autorizaciones = $stmt->fetchAll();
 
 ?>
-
+<main class="main-content">
 <div class="container mt-4">
     <img src="<?php echo substr($_SESSION['usuarioAvatar'],3); ?>" alt="Avatar del usuario" width="100">
     <h1>Tus autorizaciones, <?php echo $_SESSION['usuario'] ?> 📃</h1>
@@ -80,7 +80,7 @@ $autorizaciones = $stmt->fetchAll();
         <hr class="my-3 border-top border-1 border-secondary-subtle">
        <form action="service/gestionAutorizacion.php" method="post">
         <?php if($estado == 'pendiente') {?>
-        <button type="submit" class="btn btn-success mt-2">
+        <button type="submit" class="btn botonCrear mt-2">
             <input type="hidden" name="confirmar" id="confirmar" value="confirmado">
             <input type="hidden" name="idAutorizacion" id="idAutorizacion" value="<?php echo $autorizacion['idAutorizacion']?>">
             <i class="bi bi-check-circle"></i>
@@ -88,7 +88,7 @@ $autorizaciones = $stmt->fetchAll();
         </button>
         <?php }?>
         <?php if($estado == 'pendiente' || $estado == 'confirmado') {?>
-        <button type="submit" class="btn btn-primary mt-2">
+        <button type="submit" class="btn botoEditar mt-2">
             <input type="hidden" name="archivar" id="archivar" value="archivado">
             <input type="hidden" name="idAutorizacion" id="idAutorizacion" value="<?php echo $autorizacion['idAutorizacion']?>">
             <i class="bi bi-archive"></i>
@@ -111,6 +111,7 @@ $autorizaciones = $stmt->fetchAll();
     </div>
 </div>
 </div>
+</main>
 <?php include 'includes/footer.php';?>
 
  

@@ -10,6 +10,7 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuarioRol'] != 'admin') {
 <?php include 'includes/navbarAdmin.php'; ?>
 <?php include 'conexion.php'; ?>
 
+<main class="main-content">
 <div class="container mt-4">
     <h2>Gestión de usuarios</h2>
 
@@ -65,5 +66,5 @@ if (!isset($_SESSION['usuario']) || $_SESSION['usuarioRol'] != 'admin') {
         </ul>
     </nav>
 </div>
-
+</main>
 <?php include 'includes/footer.php'; ?>

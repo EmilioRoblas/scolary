@@ -28,3 +28,34 @@
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--bs-body-font-family);
 }
+
+.scolaryFooter{
+
+   background-color: rgb(32, 68, 76); 
+  color: white 
+ 
+}
+
+.footer-brand {
+  color: rgb(141, 181, 172);
+}
+
+.footer-link {
+  color: rgb(186, 104, 28);
+}
+
+/* Estiramiento de la página */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+}
