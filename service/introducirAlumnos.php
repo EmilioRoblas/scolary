@@ -9,15 +9,17 @@ $_SESSION['mensajeInsert'] = [];
 
 if (isset($_FILES['csv']) && $_FILES['csv']['error'] == 0) {
     $file = $_FILES['csv']['tmp_name'];
-    $handle = fopen($file, 'r');
+    $leerArchivo = fopen($file, 'r');
 
-    if ($handle) {
-        $lineNumber = 0;
-        while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-            $lineNumber++;
+    include '../conexion.php';
+
+    if ($leerArchivo) {
+        $linea = 0;
+        while (($data = fgetcsv($leerArchivo, 1000, ",")) !== FALSE) {
+            $linea++;
 
             // Saltar encabezado si lo tiene
-            if ($lineNumber == 1 && strtolower($data[0]) == 'nombre') continue;
+            if ($linea == 1 && strtolower($data[0]) == 'nombre') continue;
 
             $nombre = trim($data[0]);
             $id_tutor = (int)$data[1];
@@ -27,16 +29,16 @@ if (isset($_FILES['csv']) && $_FILES['csv']['error'] == 0) {
             $stmt = $pdo->prepare("SELECT COUNT(*) FROM usuarios WHERE id = ?");
             $stmt->execute([$id_tutor]);
             if ($stmt->fetchColumn() == 0) {
-                $_SESSION['erroresInsert'][] = "Línea $lineNumber: Tutor con ID $id_tutor no existe.";
+                $_SESSION['erroresInsert'][] = "Línea $linea: Tutor con ID $id_tutor no existe.<br>";
                 echo "tutor no existe";
                 continue;
             }
 
             // Validar grupo
-            $stmt = $pdo->prepare("SELECT COUNT(*) FROM grupos WHERE id = ?");
+            $stmt = $pdo->prepare("SELECT COUNT(*) FROM grupo WHERE id = ?");
             $stmt->execute([$id_grupo]);
             if ($stmt->fetchColumn() == 0) {
-                $_SESSION['erroresInsert'][] = "Línea $lineNumber: Grupo con ID $id_grupo no existe.<br>";
+                $_SESSION['erroresInsert'][] = "Línea $linea: Grupo con ID $id_grupo no existe.<br>";
                 echo "grupo no existe";
                 continue;
             }
@@ -45,14 +47,22 @@ if (isset($_FILES['csv']) && $_FILES['csv']['error'] == 0) {
             $stmt = $pdo->prepare("INSERT INTO alumnos (nombre, id_tutor, id_grupo) VALUES (?, ?, ?)");
             $stmt->execute([$nombre, $id_tutor, $id_grupo]);
 
-            $_SESSION['mensajeInsert'][] = "Línea $lineNumber: Alumno '$nombre' insertado correctamente.";
-            echo "todo ok";
+            $_SESSION['mensajeInsert'][] = "Línea $linea: Alumno '$nombre' insertado correctamente.<br>";
+             
+            
+             
+           
         }
+        fclose($leerArchivo);
+        header("Location: ../dashboardAdmin.php");
+        exit();
 
-        fclose($handle);
+        
     } else {
-        echo "No se pudo abrir el archivo.";
+        header("Location: ../dashboardAdmin.php?error=No se pudo abrir el archivo.");
+        exit();
     }
 } else {
-    echo "Error al subir el archivo.";
+    header("Location: ../dashboardAdmin.php?error=No se pudo subir el archivo.");
+    exit();
 }

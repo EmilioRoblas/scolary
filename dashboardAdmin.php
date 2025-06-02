@@ -54,19 +54,52 @@ $grupos = $stmtGrupos ->fetchAll();
     + Crear usuario
   </button>
 
-    <div class="mt-4">
-  <h5 class="mb-3">📄 Insertar alumnos con archivo CSV</h5>
-  <form action="introducirAlumnos.php" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2" style="max-width: 400px;">
-    <div>
-      <label for="csv" class="form-label">Selecciona archivo CSV</label>
-      <input class="form-control form-control-sm" type="file" id="csv" name="csv" accept=".csv" required>
+    <div class="mt-4 row">
+  <div class="col-md-6">
+    <h5 class="mb-3">📄 Insertar alumnos con archivo CSV</h5>
+    <form action="service/introducirAlumnos.php" method="post" enctype="multipart/form-data" class="d-flex flex-column gap-2">
+      <div>
+        <label for="csv" class="form-label">Selecciona archivo CSV</label>
+        <input class="form-control form-control-sm" type="file" id="csv" name="csv" accept=".csv" required>
+      </div>
+      <button type="submit" class="btn botonCrear btn-sm">Subir e insertar</button>
+      <div class="form-text">
+        Formato: <code>nombre, id_tutor, id_grupo</code><br>
+        Ejemplo: <code>Juan Pérez, 1, 2</code>
+      </div>
+    </form>
+  </div>
+
+  <div class="col-md-6">
+    <?php if (!empty($_SESSION['mensajeInsert']) || !empty($_SESSION['erroresInsert'])){ ?>
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title mb-3">📋 Resultado de la carga</h5>
+
+        <?php if (!empty($_SESSION['mensajeInsert'])){ ?>
+        <div class="alert alert-success p-2" role="alert">
+          <?php foreach ($_SESSION['mensajeInsert'] as $msg): ?>
+            <div>✅ <?php echo $msg; ?></div>
+          <?php endforeach; ?>
+        </div>
+        <?php } ?>
+
+        <?php if (!empty($_SESSION['erroresInsert'])){ ?>
+        <div class="alert alert-danger p-2" role="alert">
+          <?php foreach ($_SESSION['erroresInsert'] as $err){ ?>
+            <div>❌ <?php echo $err; ?></div>
+          <?php } ?>
+        </div>
+        <?php } ?>
+      </div>
     </div>
-    <button type="submit" class="btn botonCrear btn-sm">Subir e insertar</button>
-    <div class="form-text">
-      Formato: <code>nombre, id_tutor, id_grupo</code><br>
-      Ejemplo: <code>Juan Pérez, 1, 2</code>
-    </div>
-  </form>
+    <?php 
+      // Limpiar los mensajes después de mostrarlos
+      unset($_SESSION['mensajeInsert']);
+      unset($_SESSION['erroresInsert']);
+    }
+    ?>
+  </div>
 </div>
 
   <?php 
