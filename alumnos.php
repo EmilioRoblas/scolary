@@ -119,10 +119,14 @@ $tutores = $stmtTutores->fetchAll();
     </div>
   </div>
 
-    <?php
-    if(isset($_GET["mensaje"])){
-      echo "<p style='color:green'>".$_GET["mensaje"]."</p>";
-    }
+    
+    <?php if (isset($_GET['mensaje'])){ ?>
+    <br><br>
+    <div class="alert alert-success"><?= $_GET['mensaje'] ?></div>
+    <?php }?>
+    <?php if (isset($_GET['error'])){ ?>
+    <div class="alert alert-danger"><?= $_GET['error'] ?></div>
+    <?php }
 
     if(isset($_GET["orden"])){
       if ($_GET["orden"] == "nombre") {

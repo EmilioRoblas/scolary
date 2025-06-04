@@ -38,13 +38,13 @@ $grupos = $stmtGrupos ->fetchAll();
         </div>
     </div>
 
-  <?php 
-    if(isset($_GET['mensaje'])){ 
-      echo "  <div class='mb-3'>
-              <p style='color:green'>".$_GET['mensaje']."</p>
-              </div>";
-    };
-  ?>
+  <?php if (isset($_GET['mensaje'])){ ?>
+    <div class="alert alert-success"><?= $_GET['mensaje'] ?></div>
+    <?php }?>
+    <?php if (isset($_GET['error'])){ ?>
+    <div class="alert alert-danger"><?= $_GET['error'] ?></div>
+    <?php }?>
+    
     <!-- Botón para abrir el dialog -->
   <button type="button" class="btn botonCrear mt-3" data-bs-toggle="modal" data-bs-target="#crearAlumno">
     + Crear alumno
@@ -102,13 +102,7 @@ $grupos = $stmtGrupos ->fetchAll();
   </div>
 </div>
 
-  <?php 
-    if(isset($_GET['error'])){ 
-      echo "  <div class='mb-3'>
-              <p style='color:red'>".$_GET['error']."</p>
-              </div>";
-    };
-  ?>
+  
   <!-- Dialog crear alumno -->
   <div class="modal fade" id="crearAlumno" tabindex="-1" aria-labelledby="crearAlumnoLabel" aria-hidden="true">
     <div class="modal-dialog">

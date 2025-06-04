@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';     // Servidor
 $db   = 'scolary'; // Nombre de la base de datos
-$usuario = 'root';       // Usuario de la base de datos
+$usuario = 'root';       // Usuario de la base de datos. User en local: root
 $pass = '';    // Contraseña del usuario
 $charset = 'utf8mb4';    // Codificación de caracteres
 

@@ -9,9 +9,9 @@
         </a>
         <span> • </span>
         <?php 
-        if($_SESSION['usuarioRol'] == 'tutor'){
+        if(isset($_SESSION['usuarioRol']) && $_SESSION['usuarioRol'] == 'tutor'){
         ?>
-        <a href="service/bajaTutor.php" class="footer-link text-decoration-none">
+        <a href="" class="footer-link text-decoration-none">
             Dar de baja tu cuenta
         </a>
         <?php }?>

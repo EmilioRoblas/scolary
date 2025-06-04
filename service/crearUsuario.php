@@ -5,18 +5,18 @@ if (!isset($_SESSION['usuario'])) {
     exit();
 }
 
-echo "pre require";
+
         use PHPMailer\PHPMailer\PHPMailer;
         use PHPMailer\PHPMailer\Exception;
 
         require '../vendor/autoload.php';
-echo "post require";
+
 if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"]) && !isset($_POST["rol"])){
-    echo "entro comprobaciones";
+    echo "hola antes mail";
    if (filter_var($_POST["correo"], FILTER_VALIDATE_EMAIL)) {
     
    
-        echo "entro correo de usuario tutor";
+     
    
         include 'crearContrasena.php'; 
 
@@ -66,14 +66,14 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
             $mail->AltBody = 'Este es el contenido alternativo (texto plano)';
 
             $mail->send();
-            echo 'Correo enviado correctamente';
+            
         } catch (Exception $e) {
             echo "No se pudo enviar el correo. Error: {$mail->ErrorInfo}";
         }
 
 
-        // header("Location: ../dashboardAdmin.php?mensaje=Tutor ".$_POST['nombre']." añadido correctamente.".$contrasena); // Mensaje de éxito al crear al tutor
-        // exit();
+        header("Location: ../dashboardAdmin.php?mensaje=Tutor ".$_POST['nombre']." añadido correctamente.".$contrasena); // Mensaje de éxito al crear al tutor
+        exit();
             
         } catch (PDOException $e) {
             echo "Error al insertar usuario: " . $e->getMessage();
@@ -81,8 +81,9 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
 
 
     }else{
-        // header("Location: ../dashboardAdmin.php?error=Formato no válido de email"); // Mensaje de error en caso de formato de mail no válido
-        // exit();
+        echo "hola";
+        header("Location: ../dashboardAdmin.php?error=Formato no válido de email"); // Mensaje de error en caso de formato de mail no válido
+        exit();
 
     }
 
@@ -90,9 +91,9 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
 
 }else if(isset($_POST["rol"])){
     
-    echo "entro recibiendo rol";
+    echo "hola rol";
     if (filter_var($_POST["correo"], FILTER_VALIDATE_EMAIL)) {
-        echo "entro correo con rol";
+     
         include 'crearContrasena.php'; 
 
         if($_POST["rol"]== "admin"){
@@ -230,6 +231,9 @@ if(isset($_POST["nombre"]) && !empty($_POST["nombre"]) && !empty($_POST["correo"
                     
                 }
         }
+    }else{
+        header("Location: ../dashboardAdmin.php?error=Introduce un correo válido, por favor"); // Mensaje de error en caso de envíar parámetros vacíos
+        exit();
     }
 
 }else{

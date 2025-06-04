@@ -1,9 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['usuario'])) {
-    header("Location: login.php");
-    exit();
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -80,9 +77,9 @@ if (!isset($_SESSION['usuario'])) {
         </p>
 
         <div class="text-center mt-5">
-          <a href="<?php if($_SESSION['usuarioRol'] == 'admin'){
+          <a href="<?php if(isset($_SESSION['usuarioRol']) && $_SESSION['usuarioRol'] == 'admin'){
             echo "dashboardAdmin.php";
-          }else if($_SESSION['usuarioRol'] == 'profesor'){
+          }else if(isset($_SESSION['usuarioRol']) && $_SESSION['usuarioRol'] == 'profesor'){
             echo "dashboardProfesor.php";
           }else{
             echo "dashboardTutor.php";
